@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <Header title="Task Tracker"/>
+  <Header title="To-Do App"/>
 </div>
 </template>
 
@@ -12,6 +12,33 @@ export default {
   name: 'App',
   components: {
     Header
+  },
+  data() {
+    return {
+      tasks: [],
+    }
+  },
+  created(){
+    this.tasks=[
+      {
+        id: 1,
+        text: 'LeetCode Contest',
+        day: 'May 15th at 2:00am',
+        reminder: true,
+      },
+      {
+        id: 2,
+        text: 'Vue App Submission',
+        day: 'March 1st at 2:30pm',
+        reminder: true,
+      },
+      {
+        id: 3,
+        text: 'LeetCode Contest',
+        day: 'March 1st at 2:30pm',
+        reminder: true,
+      },
+    ]
   }
 }
 </script>
