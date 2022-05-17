@@ -8,13 +8,13 @@
         name: "Button",
         props: {
             text: String, 
-            color: String
+            color: String,
         },
         methods: {
             onClick()
             {
-                console.log("Clicked!")
-            },
+                this.$emit('toggle-add-task');
+            }, 
         },
     }
 </script>

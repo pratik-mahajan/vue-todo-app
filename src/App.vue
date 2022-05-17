@@ -1,22 +1,48 @@
 <template>
 <div class="container">
-  <Header title="To-Do App"/>
+  <Header @toggle-add-task="toggleAddTask" title="To-Do App"/>
+  <div v-show="showAddTasks">
+    <AddTask @add-task="addTask" />
+  </div>
+  <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
 </div>
 </template>
 
 <script>
 
-import Header from "./components/Header.vue"
+import Header from "./components/Header.vue";
+import Tasks from "./components/Tasks.vue";
+import AddTask from "./components/AddTask.vue";
 
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
+    Tasks,
+    AddTask
   },
   data() {
     return {
       tasks: [],
+      showAddTasks: false,
     }
+  },
+  methods: {
+    deleteTask(id)
+    {
+      this.tasks = this.tasks.filter((task)=> task.id!==id)
+    },
+    toggleReminder(id)
+    {
+      this.tasks=this.tasks.map((task)=> task.id===id?{...task, reminder: !task.reminder}: task)
+    },
+    addTask(task){
+      this.tasks=[...this.tasks, task]
+    },
+    toggleAddTask()
+    {
+      this.showAddTasks = (!this.showAddTasks);
+    },
   },
   created(){
     this.tasks=[
@@ -29,13 +55,13 @@ export default {
       {
         id: 2,
         text: 'Vue App Submission',
-        day: 'March 1st at 2:30pm',
-        reminder: true,
+        day: 'May 18th at 5:00pm',
+        reminder: false,
       },
       {
         id: 3,
-        text: 'LeetCode Contest',
-        day: 'March 1st at 2:30pm',
+        text: 'REST API Video',
+        day: 'May 22nd at 11:59pm',
         reminder: true,
       },
     ]
